@@ -4,6 +4,8 @@ var artistInputEl = $('#artist');
 var artworkContainerEl = $('#artwork-container');
 var artistSearchTerm = $('#artist-search-term');
 
+
+
 var formSubmitHandler = function (event) {
   event.preventDefault();
 
