@@ -32,7 +32,7 @@ var buttonClickHandler = function (event) {
 };
 
 var getArtist = function (artist) {
-  var apiUrl = "https://openaccess-api.clevelandart.org/api/artworks?limit=20&artist=" + artist;
+  var apiUrl = "https://openaccess-api.clevelandart.org/api/artworks?limit=20&artists=" + artist;
 
   fetch(apiUrl)
     .then(function (response) {
@@ -101,28 +101,30 @@ var getCentury = function (century) {
     });
   }
 }
-var displayArtwork = function (datas, searchTerm) {
-  console.log(datas.length);
-  if (datas.length === 0) {
-    $(artworkContainerEl).text('No repositories found.');
+var displayArtwork = function (artwork, searchTerm) {
+  artworkContainerEl.html('');
+  console.log(artwork.data.length);
+  if (artwork.data.length === 0) {
+    artworkContainerEl.text('No repositories found.');
     return;
   }
 
-  $('#artist-search-term').text(searchTerm);
+  artistSearchTerm.text(searchTerm);
 
-  for (var i = 0; i < datas.length; i++) {
-    var artworkName = datas[i].title
+  for (var i = 0; i < artwork.data.length; i++) {
+    var artworkName = artwork.data[i].title;
 
     var artWorkEl = $('<a>');
     // add materialize to these <a> elements
+    artWorkEl.addClass('list-item flex-row justify-space-between align-center');
   //  add links to <a> elements
 
     var titleEl = $('<span>');
-    $(titleEl).text(artworkName);
+    titleEl.text(artworkName);
 
-    $(artWorkEl).append(titleEl);
+    artWorkEl.append(titleEl);
 
-    $(artworkContainerEl).append(artWorkEl)
+    artworkContainerEl.append(artWorkEl)
   }
 };
 
