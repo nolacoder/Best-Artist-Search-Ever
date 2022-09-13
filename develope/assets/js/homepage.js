@@ -30,7 +30,7 @@ var buttonClickHandler = function (event) {
 };
 
 var getArtist = function (artist) {
-  var apiUrl = "https://openaccess-api.clevelandart.org/api/artworks?limit=20&artist="+ artist;
+  var apiUrl = "https://openaccess-api.clevelandart.org/api/artworks?limit=20&artist=" + artist;
 
   fetch(apiUrl)
     .then(function (response) {
@@ -38,7 +38,7 @@ var getArtist = function (artist) {
         console.log(response);
         response.json().then(function (data) {
           console.log(data);
-          // display
+          displayArtwork(data, artist);
         });
       } else {
         alert('Error: ' + response.statusText);
@@ -47,6 +47,81 @@ var getArtist = function (artist) {
     .catch(function (error) {
       alert('Unable to connect to Cleveland API');
     });
+};
+var getCentury = function (century) {
+  var twentyOneUrl = 'https://openaccess-api.clevelandart.org/api/artworks?limit=20&created_before=2021&created_after=2000';
+  var twentyUrl = 'https://openaccess-api.clevelandart.org/api/artworks?limit=20&created_before=2000&created_after=1900';
+  var nineteenUrl = 'https://openaccess-api.clevelandart.org/api/artworks?limit=20&created_before=1900&created_after=1800';
+  var eighteenUrl = 'https://openaccess-api.clevelandart.org/api/artworks?limit=20&created_before=1800&created_after=1700';
+  if (century === "21st Century") {
+    fetch(twentyOneUrl).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (data) {
+          console.log(data);
+          displayArtwork(data, century);
+        });
+      } else {
+        alert('Error: ' + response.statusText);
+      }
+    });
+  } else if (century === "20th Century") {
+    fetch(twentyUrl).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (data) {
+          console.log(data);
+          displayArtwork(data, century);
+        });
+      } else {
+        alert('Error: ' + response.statusText);
+      }
+    });
+  } else if (century === "19th Century") {
+    fetch(nineteenUrl).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (data) {
+          console.log(data);
+          displayArtwork(data, century);
+        });
+      } else {
+        alert('Error: ' + response.statusText);
+      }
+    });
+  } else if (century === "18th Century") {
+    fetch(eighteenUrl).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (data) {
+          console.log(data);
+          displayArtwork(data, century);
+        });
+      } else {
+        alert('Error: ' + response.statusText);
+      }
+    });
+  }
+}
+var displayArtwork = function (datas, searchTerm) {
+  console.log(datas.length);
+  if (datas.length === 0) {
+    $(artworkContainerEl).text('No repositories found.');
+    return;
+  }
+
+  $('#artist-search-term').text(searchTerm);
+
+  for (var i = 0; i < datas.length; i++) {
+    var artworkName = datas[i].title
+
+    var artWorkEl = $('<a>');
+    // add materialize to these <a> elements
+  //  add links to <a> elements
+
+    var titleEl = $('<span>');
+    $(titleEl).text(artworkName);
+
+    $(artWorkEl).append(titleEl);
+
+    $(artworkContainerEl).append(artWorkEl)
+  }
 };
 
 searchFormEl.on('submit', formSubmitHandler);
