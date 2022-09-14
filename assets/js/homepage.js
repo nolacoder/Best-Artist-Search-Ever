@@ -43,9 +43,6 @@ var getArtist = function (artist) {
   localStorage.setItem("savedArtist", JSON.stringify(savedArtist));
   renderSearches();
 
-
-
-
 fetch(apiUrl)
   .then(function (response) {
     if (response.ok) {
@@ -154,7 +151,12 @@ var renderSearches = function () {
       var savedArtistListItem = $('<button>');
       savedArtistListItem.addClass("btn btn-secondary")
       savedArtistListItem.text(savedArtist[i].savedArtist);
-      // savedArtistListItem.attr("data-city", savedArtist[i].savedArtist);
       $('#searchHistory').append(savedArtistListItem);
   }
 }
+
+$('#searchHistory').on("click", function (e){
+  var historyEl = e.target
+  getArtist($(historyEl).text())
+})
+renderSearches();
