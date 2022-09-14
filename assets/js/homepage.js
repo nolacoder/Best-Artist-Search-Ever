@@ -34,21 +34,33 @@ var buttonClickHandler = function (event) {
 var getArtist = function (artist) {
   var apiUrl = "https://openaccess-api.clevelandart.org/api/artworks?limit=20&artists=" + artist;
 
-  fetch(apiUrl)
-    .then(function (response) {
-      if (response.ok) {
-        console.log(response);
-        response.json().then(function (data) {
-          console.log(data);
-          displayArtwork(data, artist);
-        });
-      } else {
-        alert('Error: ' + response.statusText);
-      }
-    })
-    .catch(function (error) {
-      alert('Unable to connect to Cleveland API');
-    });
+  var artistInput = {
+    savedArtist: artist,
+  }
+  var savedArtist = JSON.parse(localStorage.getItem("savedArtist")) || [];
+
+  savedArtist.push(artistInput);
+  localStorage.setItem("savedArtist", JSON.stringify(savedArtist));
+  renderSearches();
+
+
+
+
+fetch(apiUrl)
+  .then(function (response) {
+    if (response.ok) {
+      console.log(response);
+      response.json().then(function (data) {
+        console.log(data);
+        displayArtwork(data, artist);
+      });
+    } else {
+      alert('Error: ' + response.statusText);
+    }
+  })
+  .catch(function (error) {
+    alert('Unable to connect to Cleveland API');
+  });
 };
 var getCentury = function (century) {
   var twentyOneUrl = 'https://openaccess-api.clevelandart.org/api/artworks?limit=20&created_before=2021&created_after=2000';
@@ -111,13 +123,15 @@ var displayArtwork = function (artwork, searchTerm) {
 
   artistSearchTerm.text(searchTerm);
 
+
+
   for (var i = 0; i < artwork.data.length; i++) {
     var artworkName = artwork.data[i].title;
 
     var artWorkEl = $('<a>');
     // add materialize to these <a> elements
     artWorkEl.addClass('list-item flex-row justify-space-between align-center');
-  //  add links to <a> elements
+    //  add links to <a> elements
 
     var titleEl = $('<span>');
     titleEl.text(artworkName);
@@ -131,3 +145,16 @@ var displayArtwork = function (artwork, searchTerm) {
 searchFormEl.on('submit', formSubmitHandler);
 centuryButtonsEl.on('click', buttonClickHandler);
 
+
+var renderSearches = function () {
+  $('#searchHistory').html("");
+  var savedArtist = JSON.parse(localStorage.getItem("savedArtist")) || [];
+
+  for (i = 0; i < savedArtist.length; i++) {
+      var savedArtistListItem = $('<button>');
+      savedArtistListItem.addClass("btn btn-secondary")
+      savedArtistListItem.text(savedArtist[i].savedArtist);
+      // savedArtistListItem.attr("data-city", savedArtist[i].savedArtist);
+      $('#searchHistory').append(savedArtistListItem);
+  }
+}
