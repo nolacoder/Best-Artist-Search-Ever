@@ -121,7 +121,7 @@ var displayArtwork = function (artwork, searchTerm) {
 
   artistSearchTerm.text(searchTerm);
 
-  var shuffledArtworkArray = getMultipleRandom(artwork.data, 20)
+  var shuffledArtworkArray = getRandomArtwork(artwork.data, 20)
 
   for (var i = 0; i < shuffledArtworkArray.length; i++) {
     var artworkName = shuffledArtworkArray[i].title;
@@ -191,8 +191,8 @@ var renderFavorites = function () {
   }
 }
 
-function getMultipleRandom(arr, num) {
-  const shuffled = [...arr].sort(() => 0.5 - Math.random());
+function getRandomArtwork(array, num) {
+  const shuffled = [...array].sort(() => 0.5 - Math.random());
 
   return shuffled.slice(0, num);
 }
