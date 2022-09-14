@@ -1,9 +1,9 @@
+// Global variable capturing elements in html
 var searchFormEl = $('#search-form');
 var centuryButtonsEl = $('#century-buttons');
 var artistInputEl = $('#artist');
 var artworkContainerEl = $('#artwork-container');
 var artistSearchTerm = $('#artist-search-term');
-
 
 
 var formSubmitHandler = function (event) {
@@ -146,9 +146,11 @@ var displayArtwork = function (artwork, searchTerm) {
 searchFormEl.on('submit', formSubmitHandler);
 centuryButtonsEl.on('click', buttonClickHandler);
 
-
+// Puts search history into the page
 var renderSearches = function () {
+  // This line grabs the searchhistory ID and clears the element
   $('#searchHistory').html("");
+  // This creates a variable that either stores the local "savedArtist" item or creates an empty array
   var savedArtist = JSON.parse(localStorage.getItem("savedArtist")) || [];
 
   for (i = 0; i < savedArtist.length; i++) {
@@ -190,7 +192,8 @@ var renderFavorites = function () {
   }
 }
 
-
+// This function happens first after js reads the rest of the page
 renderSearches();
 
+// This function happens second
 renderFavorites();
