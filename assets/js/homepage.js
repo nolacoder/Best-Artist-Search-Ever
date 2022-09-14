@@ -130,3 +130,4 @@ var displayArtwork = function (artwork, searchTerm) {
 
 searchFormEl.on('submit', formSubmitHandler);
 centuryButtonsEl.on('click', buttonClickHandler);
+
