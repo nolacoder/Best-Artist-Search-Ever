@@ -126,16 +126,20 @@ var displayArtwork = function (artwork, searchTerm) {
     var artworkName = artwork.data[i].title;
 
     var artWorkEl = $('<a>');
+    var favBtn = $('<button>');
+    //to do change the heart button inline with the title name and paste to the right of artEl
+    favBtn.addClass('btn btn-success');
+    favBtn.text(`❤️`);
     // add materialize to these <a> elements
-    artWorkEl.addClass('list-item flex-row justify-space-between align-center');
+    artWorkEl.addClass('list-item flex-row justify-space-between align-center d-flex');
     //  add links to <a> elements
 
     var titleEl = $('<span>');
     titleEl.text(artworkName);
-
+    
+    titleEl.append(favBtn);
     artWorkEl.append(titleEl);
-
-    artworkContainerEl.append(artWorkEl)
+    artworkContainerEl.append(artWorkEl);
   }
 };
 
@@ -155,8 +159,38 @@ var renderSearches = function () {
   }
 }
 
-$('#searchHistory').on("click", function (e){
+$('#searchHistory').on("click", "button", function (e){
   var historyEl = e.target
   getArtist($(historyEl).text())
 })
+
+$('#artwork-container').on("click", "button", function(e){
+  var favoriteEl = e.target;
+  var favTitle = $(favoriteEl).parent().text();
+  // var artistName = $(this).parent().text();
+  
+  var favInput = {
+    savedArt: favTitle,
+  }
+  var savedArt = JSON.parse(localStorage.getItem("savedArt")) || [];
+
+  savedArt.push(favInput);
+  localStorage.setItem("savedArt", JSON.stringify(savedArt));
+})
+
+var renderFavorites = function () {
+  $('#Favorites').html("");
+  var savedFavorites = JSON.parse(localStorage.getItem("savedArt")) || [];
+
+  for (i = 0; i < savedFavorites.length; i++) {
+      var savedArtListItem = $('<button>');
+      savedArtListItem.addClass("btn btn-secondary")
+      savedArtListItem.text(savedFavorites[i].savedArt);
+      $('#Favorites').append(savedArtListItem);
+  }
+}
+
+
 renderSearches();
+
+renderFavorites();
