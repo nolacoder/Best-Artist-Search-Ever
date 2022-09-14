@@ -59,6 +59,7 @@ fetch(apiUrl)
     alert('Unable to connect to Cleveland API');
   });
 };
+
 var getCentury = function (century) {
   var twentyOneUrl = 'https://openaccess-api.clevelandart.org/api/artworks?created_before=2021&created_after=2000';
   var twentyUrl = 'https://openaccess-api.clevelandart.org/api/artworks?created_before=2000&created_after=1900';
