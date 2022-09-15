@@ -92,16 +92,30 @@ p {
   box-shadow: 2px 2px var(--dark);
 }
 
-.hero {
-  padding: 3% 4%;
-  background-color: var(--dark);
-  color: var(--primary);
+.hero-image {
+  background-image: url("../images/11.png.png"); 
+  background-color: #cccccc;
+  height: 300px;
+  width: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+
+}
+.hero-text {
+text-align: center;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+color: white;
 }
 
-.hero p {
-  max-width: 75%;
-}
+.h1 p1 {
+  color: black;
 
+}
 .app-title {
   font-size: 3rem;
   color: var(--light);
@@ -501,5 +515,4 @@ p {
     flex: 0 0 100%;
   }
 }
-
 
