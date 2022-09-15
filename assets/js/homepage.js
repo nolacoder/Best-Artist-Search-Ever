@@ -32,7 +32,7 @@ var buttonClickHandler = function (event) {
 };
 
 var getArtist = function (artist) {
-  var apiUrl = "https://openaccess-api.clevelandart.org/api/artworks?limit=20&artists=" + artist;
+  var apiUrl = "https://openaccess-api.clevelandart.org/api/artworks?artists=" + artist;
 
   var artistInput = {
     savedArtist: artist,
@@ -59,11 +59,12 @@ fetch(apiUrl)
     alert('Unable to connect to Cleveland API');
   });
 };
+
 var getCentury = function (century) {
-  var twentyOneUrl = 'https://openaccess-api.clevelandart.org/api/artworks?limit=20&created_before=2021&created_after=2000';
-  var twentyUrl = 'https://openaccess-api.clevelandart.org/api/artworks?limit=20&created_before=2000&created_after=1900';
-  var nineteenUrl = 'https://openaccess-api.clevelandart.org/api/artworks?limit=20&created_before=1900&created_after=1800';
-  var eighteenUrl = 'https://openaccess-api.clevelandart.org/api/artworks?limit=20&created_before=1800&created_after=1700';
+  var twentyOneUrl = 'https://openaccess-api.clevelandart.org/api/artworks?created_before=2021&created_after=2000';
+  var twentyUrl = 'https://openaccess-api.clevelandart.org/api/artworks?created_before=2000&created_after=1900';
+  var nineteenUrl = 'https://openaccess-api.clevelandart.org/api/artworks?created_before=1900&created_after=1800';
+  var eighteenUrl = 'https://openaccess-api.clevelandart.org/api/artworks?created_before=1800&created_after=1700';
   if (century === "21st Century") {
     fetch(twentyOneUrl).then(function (response) {
       if (response.ok) {
@@ -110,20 +111,21 @@ var getCentury = function (century) {
     });
   }
 }
+
 var displayArtwork = function (artwork, searchTerm) {
   artworkContainerEl.html('');
   console.log(artwork.data.length);
   if (artwork.data.length === 0) {
-    artworkContainerEl.text('No repositories found.');
+    artworkContainerEl.text('No artwork found. Check your spelling or try another artist!');
     return;
   }
 
   artistSearchTerm.text(searchTerm);
 
+  var shuffledArtworkArray = getRandomArtwork(artwork.data, 20)
 
-
-  for (var i = 0; i < artwork.data.length; i++) {
-    var artworkName = artwork.data[i].title;
+  for (var i = 0; i < shuffledArtworkArray.length; i++) {
+    var artworkName = shuffledArtworkArray[i].title;
 
     var artWorkEl = $('<a>');
     var favBtn = $('<button>');
@@ -190,6 +192,11 @@ var renderFavorites = function () {
   }
 }
 
+function getRandomArtwork(array, num) {
+  const shuffled = [...array].sort(() => 0.5 - Math.random());
+
+  return shuffled.slice(0, num);
+}
 
 renderSearches();
 
