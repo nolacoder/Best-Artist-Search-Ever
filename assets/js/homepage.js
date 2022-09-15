@@ -1,3 +1,4 @@
+// Global variable capturing elements in html
 var searchFormEl = $('#search-form');
 var centuryButtonsEl = $('#century-buttons');
 var artistInputEl = $('#artist');
@@ -20,9 +21,9 @@ var formSubmitHandler = function (event) {
 
     // 4.3 Removes the value of the artist from the search box
     artistInputEl.val("");
-  } 
-    // If you click without entering a name then the alert will pop up
-    else {
+  }
+  // If you click without entering a name then the alert will pop up
+  else {
     alert('Please enter an artist name');
   }
 };
@@ -52,7 +53,7 @@ var getArtist = function (artist) {
   // Going to local storage and pulls the savedArtist, parses it into object notation or creates an empty array
   var savedArtist = JSON.parse(localStorage.getItem("savedArtist")) || [];
 
-  // The savedArtist array will added to the end of the array
+  // The savedArtist array will added to the front of the array
   savedArtist.unshift(artistInput);
 
   // This puts the updated artistInput array into the local storage
@@ -61,21 +62,21 @@ var getArtist = function (artist) {
   // Then we call renderSearches again so the new search displays immediately
   renderSearches();
 
-fetch(apiUrl)
-  .then(function (response) {
-    if (response.ok) {
-      console.log(response);
-      response.json().then(function (data) {
-        console.log(data);
-        displayArtwork(data, artist);
-      });
-    } else {
-      alert('Error: ' + response.statusText);
-    }
-  })
-  .catch(function (error) {
-    alert('Unable to connect to Cleveland API');
-  });
+  fetch(apiUrl)
+    .then(function (response) {
+      if (response.ok) {
+        console.log(response);
+        response.json().then(function (data) {
+          console.log(data);
+          displayArtwork(data, artist);
+        });
+      } else {
+        alert('Error: ' + response.statusText);
+      }
+    })
+    .catch(function (error) {
+      alert('Unable to connect to Cleveland API');
+    });
 };
 
 // 5.2 Defining a function getCentury passing in a century parameter
@@ -99,7 +100,7 @@ var getCentury = function (century) {
           displayArtwork(data, century);
         });
       } // If the response is bad then alert the response status text
-        else {
+      else {
         alert('Error: ' + response.statusText);
       }
     });
@@ -179,7 +180,7 @@ var displayArtwork = function (artwork, searchTerm) {
     var titleEl = $('<span>');
     // Displays the name of the artwork piece
     titleEl.text(artworkName);
-    
+
     // Puts the button to the title element
     titleEl.append(favBtn);
     // Puts the title element to the artWork element on the DOM
@@ -190,22 +191,23 @@ var displayArtwork = function (artwork, searchTerm) {
 };
 
 // 1.1 This function puts locally stored searches onto the page
+// Puts search history into the page
 var renderSearches = function () {
-  // Grabs the search history id element and clears out the html
+  // This line grabs the searchhistory ID and clears the element
   $('#searchHistory').html("");
-  // Finds a key value pair that matches savedArtist, then parses it into JSON objects or makes an empty array if no key value pair is there
+  // This creates a variable that either stores the local "savedArtist" item or creates an empty array
   var savedArtist = JSON.parse(localStorage.getItem("savedArtist")) || [];
 
   // This for loop goes through the length of the savedArtist array
   for (i = 0; i < savedArtist.length; i++) {
-      // For each array object a button element is created
-      var savedArtistListItem = $('<button>');
-      // Classes are added to the button element
-      savedArtistListItem.addClass("btn btn-secondary")
-      // For the button you make the text the property value corresponding to savedArtist
-      savedArtistListItem.text(savedArtist[i].savedArtist);
-      // Grabbing the id search history and appending savedArtistListItem button
-      $('#searchHistory').append(savedArtistListItem);
+    // For each array object a button element is created
+    var savedArtistListItem = $('<button>');
+    // Classes are added to the button element
+    savedArtistListItem.addClass("btn btn-secondary")
+    // For the button you make the text the property value corresponding to savedArtist
+    savedArtistListItem.text(savedArtist[i].savedArtist);
+    // Grabbing the id search history and appending savedArtistListItem button
+    $('#searchHistory').append(savedArtistListItem);
   }
 }
 
@@ -218,14 +220,14 @@ var renderFavorites = function () {
 
   // For loop going through savedFavorites array
   for (i = 0; i < savedFavorites.length; i++) {
-      // Creates a button for each array element
-      var savedArtListItem = $('<button>');
-      // Add classes to the button
-      savedArtListItem.addClass("btn btn-secondary")
-      // Making the text of the button equal to the savedArt property value in the array object
-      savedArtListItem.text(savedFavorites[i].savedArt);
-      // Targets the favorites id in the html and appends the button with the searched value on it
-      $('#Favorites').append(savedArtListItem);
+    // Creates a button for each array element
+    var savedArtListItem = $('<button>');
+    // Add classes to the button
+    savedArtListItem.addClass("btn btn-secondary")
+    // Making the text of the button equal to the savedArt property value in the array object
+    savedArtListItem.text(savedFavorites[i].savedArt);
+    // Targets the favorites id in the html and appends the button with the searched value on it
+    $('#Favorites').append(savedArtListItem);
   }
 }
 
@@ -250,7 +252,7 @@ centuryButtonsEl.on('click', buttonClickHandler);
 
 // 6. Waits for users to click on the search history buttons
 // This is an event delegation function that looks for a button to be clicked in the search history id
-$('#searchHistory').on("click", "button", function (e){
+$('#searchHistory').on("click", "button", function (e) {
   // This variable references the specific button that was clicked
   var historyEl = e.target
   // Runs the getArtist function passing the name of the button
@@ -259,7 +261,7 @@ $('#searchHistory').on("click", "button", function (e){
 
 // 7. Waits for users to click on the favorite buttons
 // This is an event delegation function that looks for a button to be clicked in the search history id
-$('#artwork-container').on("click", "button", function(e){
+$('#artwork-container').on("click", "button", function (e) {
   console.log(e);
   // Create a variable targetting the heart button
   var favoriteEl = e.target;
@@ -277,3 +279,4 @@ $('#artwork-container').on("click", "button", function(e){
   // Saves the array to local storage under savedArt
   localStorage.setItem("savedArt", JSON.stringify(savedArt));
 })
+
