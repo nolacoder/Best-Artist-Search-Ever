@@ -278,5 +278,7 @@ $('#artwork-container').on("click", "button", function (e) {
   savedArt.unshift(favInput);
   // Saves the array to local storage under savedArt
   localStorage.setItem("savedArt", JSON.stringify(savedArt));
+  //put renderFavorites function in this event clicker for the dynamically created
+  renderFavorites();
 })
 
