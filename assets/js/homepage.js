@@ -122,10 +122,10 @@ var displayArtwork = function (artwork, searchTerm) {
 
   artistSearchTerm.text(searchTerm);
 
+  var shuffledArtworkArray = getRandomArtwork(artwork.data, 20)
 
-
-  for (var i = 0; i < artwork.data.length; i++) {
-    var artworkName = artwork.data[i].title;
+  for (var i = 0; i < shuffledArtworkArray.length; i++) {
+    var artworkName = shuffledArtworkArray[i].title;
 
     var artWorkEl = $('<a>');
     var favBtn = $('<button>');
@@ -194,6 +194,11 @@ var renderFavorites = function () {
   }
 }
 
+function getRandomArtwork(array, num) {
+  const shuffled = [...array].sort(() => 0.5 - Math.random());
+
+  return shuffled.slice(0, num);
+}
 
 renderSearches();
 
