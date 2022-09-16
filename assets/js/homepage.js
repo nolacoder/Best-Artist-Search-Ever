@@ -61,7 +61,7 @@ var buttonClickHandler = function (event) {
 // 4.2 Defining the getArtist function that will pass in the name of the artist
 var getArtist = function (artist) {
   
-  var apiUrl = "http://cors.sh/playground/" + "http://openaccess-api.clevelandart.org/api/artworks?artists=" + artist;
+  var apiUrl = "https://cors-anywhere.herokuapp.com/" + "http://openaccess-api.clevelandart.org/api/artworks?artists=" + artist;
 
   var artistInput = {
     savedArtist: artist,
@@ -89,10 +89,10 @@ var getArtist = function (artist) {
 // 5.2 Defining a function getCentury passing in a century parameter
 var getCentury = function (century) {
   // Here we have variables for every century API call
-  var twentyOneUrl = 'http://cors.sh/playground/' + 'http://openaccess-api.clevelandart.org/api/artworks?created_after=2000';
-  var twentyUrl = 'http://cors.sh/playground/' + 'https://openaccess-api.clevelandart.org/api/artworks?created_before=2000&created_after=1900';
-  var nineteenUrl = 'https://cors.sh/playground/' + 'http://openaccess-api.clevelandart.org/api/artworks?created_before=1900&created_after=1800';
-  var eighteenUrl = 'https://cors.sh/playground/' + 'https://openaccess-api.clevelandart.org/api/artworks?created_before=1800&created_after=1700';
+  var twentyOneUrl = 'https://cors-anywhere.herokuapp.com/' + 'https://openaccess-api.clevelandart.org/api/artworks?created_after=2000';
+  var twentyUrl = 'https://cors-anywhere.herokuapp.com/' + 'https://openaccess-api.clevelandart.org/api/artworks?created_before=2000&created_after=1900';
+  var nineteenUrl = 'https://cors-anywhere.herokuapp.com/' + 'https://openaccess-api.clevelandart.org/api/artworks?created_before=1900&created_after=1800';
+  var eighteenUrl = 'https://cors-anywhere.herokuapp.com/' + 'https://openaccess-api.clevelandart.org/api/artworks?created_before=1800&created_after=1700';
 
   if (century === "21st Century") {
     fetch(twentyOneUrl).then(function (response) {
