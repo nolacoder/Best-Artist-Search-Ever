@@ -203,6 +203,10 @@ opacity: .8;
   border-radius: var(--border-radius);
 }
 
+#artwork-container a {
+  height: 80px;
+}
+
 /* HEIGHT / WIDTH UTILS */
 .min-100-vh {
   min-height: 100vh;

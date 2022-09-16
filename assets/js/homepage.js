@@ -5,6 +5,11 @@ var artistInputEl = $('#artist');
 var artworkContainerEl = $('#artwork-container');
 var artistSearchTerm = $('#artist-search-term');
 
+artworkContainerEl.on("click", "a", function (e) {
+  console.log(e.target.dataset);
+  $('.modal').modal().modal("open");
+  $('#modal1').append(e.target.dataset.artworkname)
+})
 
 // 4.1 Define the function formSubmitHandler
 var formSubmitHandler = function (event) {
@@ -143,7 +148,7 @@ var getCentury = function (century) {
 // 5.3 Defining a function names dsiplayArtwork taking in the parameters artwork and searchTerm
 var displayArtwork = function (artwork, searchTerm) {
   // Looks for artworkContainer and clears the html
-  artworkContainerEl.html('');
+  // artworkContainerEl.html('');
   console.log(artwork.data.length);
   // If statements saying if its not receieving any data then do next line
   if (artwork.data.length === 0) {
@@ -165,13 +170,14 @@ var displayArtwork = function (artwork, searchTerm) {
     var artworkName = shuffledArtworkArray[i].title;
 
     // Creating an anchor tag 
-    var artWorkEl = $('<a>');
+    var artWorkEl = $(`<a class="waves-effect waves-light btn modal-trigger" data-artworkName="${artworkName}">`);
     // Creating a button dynamically over the next 3 lines
     var favBtn = $('<button>');
     //to do change the heart button inline with the title name and paste to the right of artEl
     favBtn.addClass('btn btn-success col-1');
     favBtn.text(`❤️`);
     // add materialize to these <a> elements
+
     // Adds classes to anchor element
     artWorkEl.addClass('list-item flex-row justify-space-between align-center d-flex');
     //  add links to <a> elements
@@ -188,6 +194,8 @@ var displayArtwork = function (artwork, searchTerm) {
     artWorkEl.append(favBtn);
     // Put the artwork element on the artwork container
     artworkContainerEl.append(artWorkEl);
+
+    // $('.modal').modal();
   }
 };
 

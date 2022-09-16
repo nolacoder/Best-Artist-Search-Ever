@@ -15,9 +15,8 @@
 <body class="flex-column min-100-vh">
   <header class="hero-image">
     <div class="hero-text">
-
       <h1 class="h1">Best Artist Search Ever</h1>
-      <p class="p1">Search for an artist and their  artwork from any century!</p>
+      <p class="p1">Search for an artist and their artwork from any century!</p>
     </div>
   </header>
 
@@ -56,9 +55,21 @@
       </div>
     </div>
 
-    <div class="col-12 col-md-8">
+    <div class="col-12 col-md-8" data-target="modal1" class="btn modal-trigger">
       <h2 class="subtitle">Showing Artwork for: <span id="artist-search-term"></span></h2>
-      <div id="artwork-container" class="list-group"></div>
+      <div id="artwork-container">
+        <!-- <--! Modal Structure --> 
+        <!-- hello -->
+      </div>
+    </div>
+
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <h4>Modal Header</h4>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+      </div>
     </div>
   </main>
   <script src="https://code.jquery.com/jquery-3.6.1.min.js"
