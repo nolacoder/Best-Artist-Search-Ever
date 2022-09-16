@@ -5,10 +5,10 @@ var artistInputEl = $('#artist');
 var artworkContainerEl = $('#artwork-container');
 var artistSearchTerm = $('#artist-search-term');
 
-  artworkContainerEl.on("click", "a",function(e){
-    console.log(e.target.dataset);
-      $('.modal').modal().modal("open");
-      $('#modal1').append(e.target.dataset.artworkname)
+artworkContainerEl.on("click", "a", function (e) {
+  console.log(e.target.dataset);
+  $('.modal').modal().modal("open");
+  $('#modal1').append(e.target.dataset.artworkname)
 })
 
 // 4.1 Define the function formSubmitHandler
@@ -177,7 +177,7 @@ var displayArtwork = function (artwork, searchTerm) {
     favBtn.addClass('btn btn-success');
     favBtn.text(`❤️`);
     // add materialize to these <a> elements
-    
+
     // Adds classes to anchor element
     artWorkEl.addClass('list-item flex-row justify-space-between align-center d-flex');
     //  add links to <a> elements
