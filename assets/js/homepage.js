@@ -6,9 +6,14 @@ var artworkContainerEl = $('#artwork-container');
 var artistSearchTerm = $('#artist-search-term');
 
 artworkContainerEl.on("click", "a", function (e) {
-  console.log(e.target.dataset);
+  $('#modalContent').html("")
+  console.log(e.target);
   $('.modal').modal().modal("open");
-  $('#modal1').append(e.target.dataset.artworkname)
+  var target = e.target;
+  var images = $(target).attr('data-img-url');
+  var imageStore = $('<img>');
+  imageStore.attr('src', images);
+  $('#modalContent').append(imageStore);
 })
 
 // 4.1 Define the function formSubmitHandler
@@ -170,7 +175,9 @@ var displayArtwork = function (artwork, searchTerm) {
     var artworkName = shuffledArtworkArray[i].title;
 
     // Creating an anchor tag 
-    var artWorkEl = $(`<a class="waves-effect waves-light btn modal-trigger" data-artworkName="${artworkName}">`);
+    var imageUrl = shuffledArtworkArray[i].images.web.url;
+    var artWorkEl = $(`<a class="waves-effect waves-light btn modal-trigger" data-artworkName="${artworkName}" data-img-url="${imageUrl}">`);
+
     // Creating a button dynamically over the next 3 lines
     var favBtn = $('<button>');
     //to do change the heart button inline with the title name and paste to the right of artEl
