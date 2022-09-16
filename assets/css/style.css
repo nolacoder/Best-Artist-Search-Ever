@@ -52,7 +52,7 @@ p {
   line-height: 2px;
   padding: 6px 5px;
   width: 100%;
-  display: block;
+  display: inline-block;
   margin: 5px 0;
   color: var(--primary);
   background-color: var(--light);
