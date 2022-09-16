@@ -82,7 +82,7 @@ var getArtist = function (artist) {
 // 5.2 Defining a function getCentury passing in a century parameter
 var getCentury = function (century) {
   // Here we have variables for every century API call
-  var twentyOneUrl = 'https://openaccess-api.clevelandart.org/api/artworks?created_after=2000';
+  var twentyOneUrl = 'https://openaccess-api.clevelandart.org/api/artworks?created_before=2100&created_after=2000';
   var twentyUrl = 'https://openaccess-api.clevelandart.org/api/artworks?created_before=2000&created_after=1900';
   var nineteenUrl = 'https://openaccess-api.clevelandart.org/api/artworks?created_before=1900&created_after=1800';
   var eighteenUrl = 'https://openaccess-api.clevelandart.org/api/artworks?created_before=1800&created_after=1700';
@@ -279,7 +279,5 @@ $('#artwork-container').on("click", "button", function (e) {
   savedArt.unshift(favInput);
   // Saves the array to local storage under savedArt
   localStorage.setItem("savedArt", JSON.stringify(savedArt));
-  //put renderFavorites function in this event clicker for the dynamically created
-  renderFavorites();
 })
 
