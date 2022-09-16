@@ -5,6 +5,32 @@ var artistInputEl = $('#artist');
 var artworkContainerEl = $('#artwork-container');
 var artistSearchTerm = $('#artist-search-term');
 
+artworkContainerEl.on("click", "a", function (e) {
+  $('#modalContent').html("")
+  console.log(e.target);
+  $('.modal').modal().modal("open");
+  var target = e.target;
+  if ($(target).attr('data-img-url')) {
+    var images = $(target).attr('data-img-url');
+    var imageStore = $('<img>');
+    imageStore.attr('src', images);
+    $('#modalContent').append(imageStore);
+  } else {
+    var noImageText = $('<p>');
+    noImageText.text("Sorry! This artwork has no image to display!")
+    $('#modalContent').append(noImageText);
+  }
+
+  var modalUrl = $(target).attr('data-art-url');
+  var modalUrlEl = $('<a>');
+  modalUrlEl.attr('href', modalUrl);
+  modalUrlEl.attr('target', '_blank');
+  modalUrlEl.text(modalUrl);
+
+  $('#modalContent').append(modalUrlEl)
+  var modalHeader = $(target).attr('data-artworkName');
+  $('#modalHeader').text(modalHeader);
+})
 
 // 4.1 Define the function formSubmitHandler
 var formSubmitHandler = function (event) {
@@ -82,7 +108,7 @@ var getArtist = function (artist) {
 // 5.2 Defining a function getCentury passing in a century parameter
 var getCentury = function (century) {
   // Here we have variables for every century API call
-  var twentyOneUrl = 'https://openaccess-api.clevelandart.org/api/artworks?created_before=2100&created_after=2000';
+  var twentyOneUrl = 'https://openaccess-api.clevelandart.org/api/artworks?created_after=2000';
   var twentyUrl = 'https://openaccess-api.clevelandart.org/api/artworks?created_before=2000&created_after=1900';
   var nineteenUrl = 'https://openaccess-api.clevelandart.org/api/artworks?created_before=1900&created_after=1800';
   var eighteenUrl = 'https://openaccess-api.clevelandart.org/api/artworks?created_before=1800&created_after=1700';
@@ -163,15 +189,23 @@ var displayArtwork = function (artwork, searchTerm) {
   for (var i = 0; i < shuffledArtworkArray.length; i++) {
     // Looks for the title property in all of the array objects inside the shuffled artowrk array stores it in variable
     var artworkName = shuffledArtworkArray[i].title;
+    var artPage = shuffledArtworkArray[i].url;
 
     // Creating an anchor tag 
-    var artWorkEl = $('<a>');
+    if (shuffledArtworkArray[i].images) {
+      var imageUrl = shuffledArtworkArray[i].images.web.url;
+      var artWorkEl = $(`<a class="waves-effect waves-light btn modal-trigger" data-artworkName="${artworkName}" data-img-url="${imageUrl}" data-art-url="${artPage}">`);
+    } else {
+      var artWorkEl = $(`<a class="waves-effect waves-light btn modal-trigger" data-artworkName="${artworkName}" data-art-url="${artPage}">`);
+    }
+
     // Creating a button dynamically over the next 3 lines
     var favBtn = $('<button>');
     //to do change the heart button inline with the title name and paste to the right of artEl
     favBtn.addClass('btn btn-success col-1');
     favBtn.text(`❤️`);
     // add materialize to these <a> elements
+
     // Adds classes to anchor element
     artWorkEl.addClass('list-item flex-row justify-space-between align-center d-flex');
     //  add links to <a> elements
@@ -188,6 +222,8 @@ var displayArtwork = function (artwork, searchTerm) {
     artWorkEl.append(favBtn);
     // Put the artwork element on the artwork container
     artworkContainerEl.append(artWorkEl);
+
+    // $('.modal').modal();
   }
 };
 
@@ -279,5 +315,6 @@ $('#artwork-container').on("click", "button", function (e) {
   savedArt.unshift(favInput);
   // Saves the array to local storage under savedArt
   localStorage.setItem("savedArt", JSON.stringify(savedArt));
+  //put renderFavorites function in this event clicker for the dynamically created
+  renderFavorites();
 })
-

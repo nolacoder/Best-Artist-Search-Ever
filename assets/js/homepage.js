@@ -6,9 +6,30 @@ var artworkContainerEl = $('#artwork-container');
 var artistSearchTerm = $('#artist-search-term');
 
 artworkContainerEl.on("click", "a", function (e) {
-  console.log(e.target.dataset);
+  $('#modalContent').html("")
+  console.log(e.target);
   $('.modal').modal().modal("open");
-  $('#modal1').append(e.target.dataset.artworkname)
+  var target = e.target;
+  if ($(target).attr('data-img-url')) {
+    var images = $(target).attr('data-img-url');
+    var imageStore = $('<img>');
+    imageStore.attr('src', images);
+    $('#modalContent').append(imageStore);
+  } else {
+    var noImageText = $('<p>');
+    noImageText.text("Sorry! This artwork has no image to display!")
+    $('#modalContent').append(noImageText);
+  }
+
+  var modalUrl = $(target).attr('data-art-url');
+  var modalUrlEl = $('<a>');
+  modalUrlEl.attr('href', modalUrl);
+  modalUrlEl.attr('target', '_blank');
+  modalUrlEl.text(modalUrl);
+
+  $('#modalContent').append(modalUrlEl)
+  var modalHeader = $(target).attr('data-artworkName');
+  $('#modalHeader').text(modalHeader);
 })
 
 // 4.1 Define the function formSubmitHandler
@@ -148,7 +169,7 @@ var getCentury = function (century) {
 // 5.3 Defining a function names dsiplayArtwork taking in the parameters artwork and searchTerm
 var displayArtwork = function (artwork, searchTerm) {
   // Looks for artworkContainer and clears the html
-  // artworkContainerEl.html('');
+  artworkContainerEl.html('');
   console.log(artwork.data.length);
   // If statements saying if its not receieving any data then do next line
   if (artwork.data.length === 0) {
@@ -168,9 +189,16 @@ var displayArtwork = function (artwork, searchTerm) {
   for (var i = 0; i < shuffledArtworkArray.length; i++) {
     // Looks for the title property in all of the array objects inside the shuffled artowrk array stores it in variable
     var artworkName = shuffledArtworkArray[i].title;
+    var artPage = shuffledArtworkArray[i].url;
 
     // Creating an anchor tag 
-    var artWorkEl = $(`<a class="waves-effect waves-light btn modal-trigger" data-artworkName="${artworkName}">`);
+    if (shuffledArtworkArray[i].images) {
+      var imageUrl = shuffledArtworkArray[i].images.web.url;
+      var artWorkEl = $(`<a class="waves-effect waves-light btn modal-trigger" data-artworkName="${artworkName}" data-img-url="${imageUrl}" data-art-url="${artPage}">`);
+    } else {
+      var artWorkEl = $(`<a class="waves-effect waves-light btn modal-trigger" data-artworkName="${artworkName}" data-art-url="${artPage}">`);
+    }
+
     // Creating a button dynamically over the next 3 lines
     var favBtn = $('<button>');
     //to do change the heart button inline with the title name and paste to the right of artEl
