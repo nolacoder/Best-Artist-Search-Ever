@@ -29,7 +29,7 @@ artworkContainerEl.on("click", "a", function (e) {
 
   $('#modalContent').append(modalUrlEl)
   var modalHeader = $(target).attr('data-artworkName');
-  $('#modalHeader').text(modalHeader);
+  $('#modalHeader').text("View more info here!");
 })
 
 // 4.1 Define the function formSubmitHandler
@@ -69,7 +69,7 @@ var buttonClickHandler = function (event) {
 // 4.2 Defining the getArtist function that will pass in the name of the artist
 var getArtist = function (artist) {
   // This is the url where the request will be sent
-  var apiUrl = "https://openaccess-api.clevelandart.org/api/artworks?artists=" + artist;
+  var apiUrl = 'https://cors.sh/playground/' + "https://openaccess-api.clevelandart.org/api/artworks?artists=" + artist;
 
   // Creating another variable that is an object, saving the artist that was searched as the value for the savedArtist property
   var artistInput = {
@@ -108,10 +108,10 @@ var getArtist = function (artist) {
 // 5.2 Defining a function getCentury passing in a century parameter
 var getCentury = function (century) {
   // Here we have variables for every century API call
-  var twentyOneUrl = 'https://openaccess-api.clevelandart.org/api/artworks?created_after=2000';
-  var twentyUrl = 'https://openaccess-api.clevelandart.org/api/artworks?created_before=2000&created_after=1900';
-  var nineteenUrl = 'https://openaccess-api.clevelandart.org/api/artworks?created_before=1900&created_after=1800';
-  var eighteenUrl = 'https://openaccess-api.clevelandart.org/api/artworks?created_before=1800&created_after=1700';
+  var twentyOneUrl = 'https://cors.sh/playground/' + 'https://openaccess-api.clevelandart.org/api/artworks?created_after=2000';
+  var twentyUrl = 'https://cors.sh/playground/' + 'https://openaccess-api.clevelandart.org/api/artworks?created_before=2000&created_after=1900';
+  var nineteenUrl = 'https://cors.sh/playground/' + 'https://openaccess-api.clevelandart.org/api/artworks?created_before=1900&created_after=1800';
+  var eighteenUrl = 'https://cors.sh/playground/' + 'https://openaccess-api.clevelandart.org/api/artworks?created_before=1800&created_after=1700';
 
   // If the century parameter is equal to this string 
   if (century === "21st Century") {
