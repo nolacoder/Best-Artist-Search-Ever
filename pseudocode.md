@@ -5,11 +5,6 @@ var artistInputEl = $('#artist');
 var artworkContainerEl = $('#artwork-container');
 var artistSearchTerm = $('#artist-search-term');
 
-artworkContainerEl.on("click", "a", function (e) {
-  console.log(e.target.dataset);
-  $('.modal').modal().modal("open");
-  $('#modal1').append(e.target.dataset.artworkname)
-})
 
 // 4.1 Define the function formSubmitHandler
 var formSubmitHandler = function (event) {
@@ -87,7 +82,7 @@ var getArtist = function (artist) {
 // 5.2 Defining a function getCentury passing in a century parameter
 var getCentury = function (century) {
   // Here we have variables for every century API call
-  var twentyOneUrl = 'https://openaccess-api.clevelandart.org/api/artworks?created_after=2000';
+  var twentyOneUrl = 'https://openaccess-api.clevelandart.org/api/artworks?created_before=2100&created_after=2000';
   var twentyUrl = 'https://openaccess-api.clevelandart.org/api/artworks?created_before=2000&created_after=1900';
   var nineteenUrl = 'https://openaccess-api.clevelandart.org/api/artworks?created_before=1900&created_after=1800';
   var eighteenUrl = 'https://openaccess-api.clevelandart.org/api/artworks?created_before=1800&created_after=1700';
@@ -148,7 +143,7 @@ var getCentury = function (century) {
 // 5.3 Defining a function names dsiplayArtwork taking in the parameters artwork and searchTerm
 var displayArtwork = function (artwork, searchTerm) {
   // Looks for artworkContainer and clears the html
-  // artworkContainerEl.html('');
+  artworkContainerEl.html('');
   console.log(artwork.data.length);
   // If statements saying if its not receieving any data then do next line
   if (artwork.data.length === 0) {
@@ -170,14 +165,13 @@ var displayArtwork = function (artwork, searchTerm) {
     var artworkName = shuffledArtworkArray[i].title;
 
     // Creating an anchor tag 
-    var artWorkEl = $(`<a class="waves-effect waves-light btn modal-trigger" data-artworkName="${artworkName}">`);
+    var artWorkEl = $('<a>');
     // Creating a button dynamically over the next 3 lines
     var favBtn = $('<button>');
     //to do change the heart button inline with the title name and paste to the right of artEl
     favBtn.addClass('btn btn-success col-1');
     favBtn.text(`❤️`);
     // add materialize to these <a> elements
-
     // Adds classes to anchor element
     artWorkEl.addClass('list-item flex-row justify-space-between align-center d-flex');
     //  add links to <a> elements
@@ -194,8 +188,6 @@ var displayArtwork = function (artwork, searchTerm) {
     artWorkEl.append(favBtn);
     // Put the artwork element on the artwork container
     artworkContainerEl.append(artWorkEl);
-
-    // $('.modal').modal();
   }
 };
 
@@ -287,7 +279,5 @@ $('#artwork-container').on("click", "button", function (e) {
   savedArt.unshift(favInput);
   // Saves the array to local storage under savedArt
   localStorage.setItem("savedArt", JSON.stringify(savedArt));
-  //put renderFavorites function in this event clicker for the dynamically created
-  renderFavorites();
 })
 

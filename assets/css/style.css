@@ -52,7 +52,7 @@ p {
   line-height: 2px;
   padding: 6px 5px;
   width: 100%;
-  display: block;
+  display: inline-block;
   margin: 5px 0;
   color: var(--primary);
   background-color: var(--light);
@@ -109,13 +109,17 @@ position: absolute;
 top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
+width: 540px;
+height: 200px;
+background-color: black;
 color: white;
+opacity: .8;
 }
 
-.h1 p1 {
-  color: black;
-
+.h1 {
+  color: white;
 }
+
 .app-title {
   font-size: 3rem;
   color: var(--light);
@@ -197,6 +201,10 @@ color: white;
   font-size: 1.2rem;
   border: 2px solid var(--light-dark);
   border-radius: var(--border-radius);
+}
+
+#artwork-container a {
+  height: 80px;
 }
 
 /* HEIGHT / WIDTH UTILS */
