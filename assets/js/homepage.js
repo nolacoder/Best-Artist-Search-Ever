@@ -25,11 +25,11 @@ artworkContainerEl.on("click", "a", function (e) {
   var modalUrlEl = $('<a>');
   modalUrlEl.attr('href', modalUrl);
   modalUrlEl.attr('target', '_blank');
-  modalUrlEl.text(modalUrl);
+  modalUrlEl.text("View more info here!");
 
   $('#modalContent').append(modalUrlEl)
   var modalHeader = $(target).attr('data-artworkName');
-  $('#modalHeader').text("View more info here!");
+  $('#modalHeader').text(modalHeader);
 })
 
 // 4.1 Define the function formSubmitHandler
