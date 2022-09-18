@@ -26,7 +26,7 @@ The webpage also offers a search of paintings by century. Click on any century b
 
 ## Link to the Webpage
 (https://nolacoder.github.io/Best-Artist-Search-Ever/)
-![main](assets/images/searchbyartistbox.png)
+![main](assets/images/main.png)
 
 ## License
 N/A
