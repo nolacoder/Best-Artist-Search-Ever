@@ -12,7 +12,7 @@ The user can click on the button with the heart next to the name of the painting
 The webpage also offers a search of paintings by century. Click on any century button in the "Search by Century" box, and the webpage will populate twenty random paintings from the selected century.
 ![Century](assets/images/century.png)
 
-* Reminder that due to CORS issues, we are utilizing this cors demo implementation to allow the search queries to function. You can make queries functional for you client by following this link and clicking the button to acess the CORS Anywhere demo.
+* Reminder that due to CORS issues, we are utilizing this cors demo implementation to allow the search queries to function. You can make queries functional for you client by following this link and clicking the button to acess the CORS Anywhere demo. https://cors-anywhere.herokuapp.com/corsdemo
 
 
 ## Technologies Used:
