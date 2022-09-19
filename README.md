@@ -22,7 +22,7 @@ The webpage also offers a search of paintings by century. Click on any century b
 * Materialize API
 * Cleveland Museum of Art API 
 * jQuery API
-
+* Font-Awesome
 
 ## Link to the Webpage
 (https://nolacoder.github.io/Best-Artist-Search-Ever/)

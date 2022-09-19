@@ -61,7 +61,7 @@ var buttonClickHandler = function (event) {
 // 4.2 Defining the getArtist function that will pass in the name of the artist
 var getArtist = function (artist) {
   
-  var apiUrl = "https://cors-anywhere.herokuapp.com/" + "http://openaccess-api.clevelandart.org/api/artworks?artists=" + artist;
+  var apiUrl = "http://openaccess-api.clevelandart.org/api/artworks?artists=" + artist;
 
   var artistInput = {
     savedArtist: artist,
@@ -92,7 +92,7 @@ var getCentury = function (century) {
   var twentyOneUrl = 'https://cors-anywhere.herokuapp.com/' + 'https://openaccess-api.clevelandart.org/api/artworks?created_after=2000';
   var twentyUrl = 'https://cors-anywhere.herokuapp.com/' + 'https://openaccess-api.clevelandart.org/api/artworks?created_before=2000&created_after=1900';
   var nineteenUrl = 'https://cors-anywhere.herokuapp.com/' + 'https://openaccess-api.clevelandart.org/api/artworks?created_before=1900&created_after=1800';
-  var eighteenUrl = 'https://cors-anywhere.herokuapp.com/' + 'https://openaccess-api.clevelandart.org/api/artworks?created_before=1800&created_after=1700';
+  var eighteenUrl = 'https://openaccess-api.clevelandart.org/api/artworks?created_before=1800&created_after=1700';
 
   if (century === "21st Century") {
     fetch(twentyOneUrl).then(function (response) {
